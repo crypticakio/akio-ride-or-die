@@ -195,22 +195,41 @@ function updateStatusUI(status, activities) {
 fetchDiscordStatus();
 setInterval(fetchDiscordStatus, 10000);
 
-// ===== VIEW COUNTER FUNCTIONALITY =====
-function initializeViewCounter() {
+// ===== GLOBAL VIEW COUNTER FUNCTIONALITY =====
+async function initializeViewCounter() {
     const viewCountElement = document.getElementById('view-count');
-    const storageKey = 'akio_profile_views';
     
-    // Get current views from localStorage
-    let views = parseInt(localStorage.getItem(storageKey) || '0');
-    
-    // Increment views
-    views++;
-    
-    // Save back to localStorage
-    localStorage.setItem(storageKey, views.toString());
-    
-    // Animate the counter
-    animateCounter(viewCountElement, views);
+    try {
+        // Check if this user has already been counted in this session
+        const sessionKey = 'akio_profile_viewed_session';
+        const hasViewedThisSession = sessionStorage.getItem(sessionKey);
+        
+        if (!hasViewedThisSession) {
+            // Increment the global counter (only once per session)
+            const response = await fetch('https://api.countapi.xyz/hit/akio-profile-unique/visits');
+            const data = await response.json();
+            
+            // Mark this session as counted
+            sessionStorage.setItem(sessionKey, 'true');
+            
+            // Animate to the new count
+            animateCounter(viewCountElement, data.value);
+        } else {
+            // Just get the current count without incrementing
+            const response = await fetch('https://api.countapi.xyz/get/akio-profile-unique/visits');
+            const data = await response.json();
+            
+            // Display the current count
+            animateCounter(viewCountElement, data.value);
+        }
+    } catch (error) {
+        console.error('Error fetching view count:', error);
+        // Fallback to a loading state
+        viewCountElement.textContent = '---';
+        
+        // Retry after 3 seconds
+        setTimeout(initializeViewCounter, 3000);
+    }
 }
 
 function animateCounter(element, targetValue) {
@@ -231,3 +250,20 @@ function animateCounter(element, targetValue) {
 
 // Initialize view counter on page load
 initializeViewCounter();
+
+// Optional: Update view count every 30 seconds to show real-time changes
+setInterval(async () => {
+    const viewCountElement = document.getElementById('view-count');
+    try {
+        const response = await fetch('https://api.countapi.xyz/get/akio-profile-unique/visits');
+        const data = await response.json();
+        
+        // Update without animation if the count changed
+        const currentDisplayed = parseInt(viewCountElement.textContent.replace(/,/g, ''));
+        if (data.value !== currentDisplayed) {
+            viewCountElement.textContent = data.value.toLocaleString();
+        }
+    } catch (error) {
+        console.error('Error updating view count:', error);
+    }
+}, 30000); // Update every 30 seconds
