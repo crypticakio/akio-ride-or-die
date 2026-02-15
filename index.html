@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akio | Rider & Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        orbitron: ['Orbitron', 'sans-serif'],
+                    },
+                    colors: {
+                        glass: 'rgba(255, 255, 255, 0.05)',
+                        glassBorder: 'rgba(255, 255, 255, 0.1)',
+                        bike: {
+                            orange: '#FF6B35',
+                            red: '#DC2626',
+                            yellow: '#FBBF24',
+                            chrome: '#E5E7EB',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Badge glow animation */
+        @keyframes badge-glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.6)) 
+                        drop-shadow(0 0 6px rgba(255, 215, 0, 0.4))
+                        drop-shadow(0 0 9px rgba(255, 165, 0, 0.3));
+            }
+            50% {
+                filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.9)) 
+                        drop-shadow(0 0 12px rgba(255, 215, 0, 0.6))
+                        drop-shadow(0 0 18px rgba(255, 165, 0, 0.5));
+            }
+        }
+        
+        .badge-glow {
+            animation: badge-glow 2s ease-in-out infinite;
+        }
+        
+        /* Individual badge glow colors */
+        @keyframes crown-glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.7)) 
+                        drop-shadow(0 0 6px rgba(255, 215, 0, 0.5))
+                        drop-shadow(0 0 9px rgba(255, 165, 0, 0.3));
+            }
+            50% {
+                filter: drop-shadow(0 0 6px rgba(255, 215, 0, 1)) 
+                        drop-shadow(0 0 12px rgba(255, 215, 0, 0.7))
+                        drop-shadow(0 0 18px rgba(255, 165, 0, 0.6));
+            }
+        }
+        
+        @keyframes hated-glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 3px rgba(220, 38, 38, 0.7)) 
+                        drop-shadow(0 0 6px rgba(220, 38, 38, 0.5))
+                        drop-shadow(0 0 9px rgba(185, 28, 28, 0.3));
+            }
+            50% {
+                filter: drop-shadow(0 0 6px rgba(220, 38, 38, 1)) 
+                        drop-shadow(0 0 12px rgba(220, 38, 38, 0.7))
+                        drop-shadow(0 0 18px rgba(185, 28, 28, 0.6));
+            }
+        }
+        
+        @keyframes owner-glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 3px rgba(168, 85, 247, 0.7)) 
+                        drop-shadow(0 0 6px rgba(168, 85, 247, 0.5))
+                        drop-shadow(0 0 9px rgba(139, 92, 246, 0.3));
+            }
+            50% {
+                filter: drop-shadow(0 0 6px rgba(168, 85, 247, 1)) 
+                        drop-shadow(0 0 12px rgba(168, 85, 247, 0.7))
+                        drop-shadow(0 0 18px rgba(139, 92, 246, 0.6));
+            }
+        }
+        
+        .crown-glow {
+            animation: crown-glow 2s ease-in-out infinite;
+        }
+        
+        .hated-glow {
+            animation: hated-glow 2.5s ease-in-out infinite;
+            animation-delay: 0.3s;
+        }
+        
+        .owner-glow {
+            animation: owner-glow 2.2s ease-in-out infinite;
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 selection:bg-orange-500 selection:text-black">
+
+    <!-- Video Background -->
+    <video class="fixed top-0 left-0 w-full h-full object-cover z-[-3]" autoplay muted loop playsinline>
+        <source src="assets/background.mp4" type="video/mp4">
+    </video>
+    
+    <!-- Video overlay -->
+    <div class="fixed top-0 left-0 w-full h-full z-[-2] bg-black/60"></div>
+
+    <!-- Animated background pattern -->
+    <div class="bg-pattern"></div>
+    
+    <!-- Speed lines effect -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="speed-line w-full"></div>
+        <div class="speed-line w-full"></div>
+        <div class="speed-line w-full"></div>
+        <div class="speed-line w-full"></div>
+    </div>
+
+    <main class="glass-card w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden p-8 relative glow-orange">
+        
+        <!-- Top accent bar with tire track pattern -->
+        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-orange-600 via-red-600 to-yellow-500 tire-track"></div>
+        
+        <!-- Corner flame accents -->
+        <div class="absolute top-4 right-4 text-orange-500/20 text-6xl">
+            <i class="fas fa-fire"></i>
+        </div>
+        <div class="absolute bottom-4 left-4 text-red-500/20 text-6xl">
+            <i class="fas fa-fire"></i>
+        </div>
+
+        <header class="flex flex-col md:flex-row items-center gap-6 mb-8">
+            <div class="avatar-container group relative">
+                <div class="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-600 rounded-full blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
+                <img id="avatar-img" src="https://cdn.discordapp.com/avatars/681474898790580226/3b558cdce12008b9ab5f59b413c81ae3.png?size=256" alt="Akio" class="w-30 h-30 rounded-full border-4 border-orange-500 shadow-2xl transition-all duration-500 relative z-10 group-hover:scale-105 glow-orange avatar-fire">
+                
+                <div id="avatar-decoration-container">
+                    <img src="https://cdn.discordapp.com/avatar-decoration-presets/a_c9f4f93d934eec8d0afb8db2dac3df26.png?size=160&amp;passthrough=true" alt="Avatar Decoration" class="avatar-decoration">
+                </div>
+                
+                <div id="discord-badge" class="absolute bottom-2 right-2 w-7 h-7 rounded-full border-4 border-black bg-yellow-500 glow-orange" style="z-index: 30;" title="Idle"></div>
+            </div>
+            
+            <div class="text-center md:text-left flex-1">
+                <div class="flex flex-col md:flex-row md:items-center gap-2 justify-center md:justify-start mb-2">
+                    <h1 id="username-display" class="text-4xl font-black font-orbitron tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-500 to-yellow-400 drop-shadow-lg particles-username fire-text">
+                        <div class="particles" style="background-image: url(&quot;https://assets.haunt.gg/sparkles/white.gif&quot;);"></div>
+                        AKIO
+                    </h1>
+                    <div class="flex items-center gap-1.5 flex-wrap justify-center md:justify-start">
+                        <span class="px-3 py-1 rounded-full bg-gradient-to-r from-orange-600 to-red-600 text-[10px] text-white border-2 border-orange-400/50 uppercase tracking-widest font-bold shadow-lg glow-orange inline-flex items-center gap-1.5 pulse-glow">
+                            <i class="fas fa-motorcycle text-xs"></i> RIDER
+                        </span>
+                        <img src="assets/crown.gif" alt="Crown Badge" class="w-5 h-5 object-contain hover:scale-110 transition-transform cursor-pointer crown-glow" title="Crown">
+                        <img src="assets/hated_fakecrime1.gif" alt="Hated Fakecrime Badge" class="w-5 h-5 object-contain hover:scale-110 transition-transform cursor-pointer hated-glow" title="Hated Fakecrime">
+                        <img src="assets/owner.gif" alt="Owner Badge" class="w-5 h-5 object-contain hover:scale-110 transition-transform cursor-pointer owner-glow" title="Owner">
+                    </div>
+                </div>
+                
+                <p class="text-orange-400 font-mono text-sm mt-1 mb-3 flex items-center justify-center md:justify-start gap-2 font-semibold">
+                    <i class="fas fa-road"></i> Big Bike Enthusiast & Developer
+                </p>
+                
+                <p class="text-slate-300 text-sm leading-relaxed max-w-xl">
+                    Living life in the <span class="text-orange-400 font-bold">fast lane</span>. Two wheels, endless roads, and the freedom of the open highway. 
+                    <span class="text-red-400">Ride hard</span>, <span class="text-yellow-400">code harder</span>.
+                </p>
+
+                <div class="mt-3 flex flex-wrap items-center gap-2 justify-center md:justify-start">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gradient-to-r from-orange-900/40 to-red-900/40 border-2 border-orange-500/40 text-xs font-mono text-orange-300 shadow-lg glow-orange pulse-glow">
+                        <i class="fa-brands fa-discord"></i>
+                        <span id="discord-text" class="font-semibold">Idling</span>
+                    </div>
+                    
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gradient-to-r from-orange-900/40 to-red-900/40 border-2 border-orange-500/40 text-xs font-mono text-orange-300 shadow-lg glow-orange pulse-glow">
+                        <i class="fas fa-eye"></i>
+                        <span id="view-count" class="font-bold text-orange-400">0</span>
+                        <span class="font-semibold">views</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <hr class="border-orange-500/20 mb-6">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            
+            <div>
+                <h2 class="text-xs font-black uppercase tracking-widest text-orange-400 mb-3 font-orbitron flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-red-500 text-sm"></i>PASSIONS
+                </h2>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1.5 rounded-lg bg-slate-800/40 backdrop-blur-sm text-xs border-2 border-orange-500/30 hover:border-orange-500 transition-all hover:scale-105 hover:glow-orange font-semibold text-orange-100">
+                        <i class="fas fa-motorcycle mr-1.5"></i>Superbikes
+                    </span>
+                    <span class="px-3 py-1.5 rounded-lg bg-slate-800/40 backdrop-blur-sm text-xs border-2 border-red-500/30 hover:border-red-500 transition-all hover:scale-105 hover:glow-red font-semibold text-red-100">
+                        <i class="fas fa-gauge-high mr-1.5"></i>Speed
+                    </span>
+                    <span class="px-3 py-1.5 rounded-lg bg-slate-800/40 backdrop-blur-sm text-xs border-2 border-yellow-500/30 hover:border-yellow-500 transition-all hover:scale-105 font-semibold text-yellow-100">
+                        <i class="fas fa-code mr-1.5"></i>Coding
+                    </span>
+                    <span class="px-3 py-1.5 rounded-lg bg-slate-800/40 backdrop-blur-sm text-xs border-2 border-blue-500/30 hover:border-blue-500 transition-all hover:scale-105 font-semibold text-blue-100">
+                        <i class="fas fa-music mr-1.5"></i>Music
+                    </span>
+                    <span class="px-3 py-1.5 rounded-lg bg-slate-800/40 backdrop-blur-sm text-xs border-2 border-purple-500/30 hover:border-purple-500 transition-all hover:scale-105 font-semibold text-purple-100">
+                        <i class="fas fa-gamepad mr-1.5"></i>Gaming
+                    </span>
+                    <span class="px-3 py-1.5 rounded-lg bg-slate-800/40 backdrop-blur-sm text-xs border-2 border-green-500/30 hover:border-green-500 transition-all hover:scale-105 font-semibold text-green-100">
+                        <i class="fas fa-map-marked-alt mr-1.5"></i>Road Trips
+                    </span>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-xs font-black uppercase tracking-widest text-orange-400 mb-3 font-orbitron flex items-center gap-2">
+                    <i class="fa-solid fa-gauge-high text-red-500 text-sm"></i>STATUS
+                </h2>
+                <div class="p-4 rounded-xl bg-orange-500/5 border-2 border-orange-500/30 glow-orange backdrop-blur-sm">
+                    <h3 class="text-sm font-bold text-orange-400 mb-1.5 flex items-center gap-2">
+                        <i class="fas fa-road"></i> Riding & Building
+                    </h3>
+                    <p class="text-xs text-slate-300 mb-2">
+                        Currently cruising through life on two wheels while crafting the next big project. The journey never stops.
+                    </p>
+                    <div class="mt-2 w-full bg-slate-900/80 rounded-full h-1.5 border border-orange-500/30 overflow-hidden">
+                        <div class="bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500 h-1.5 rounded-full w-4/5 animate-pulse shadow-lg shadow-orange-500/50"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex gap-3 mb-6">
+            <a href="https://guns.lol/akiofreshenss" target="_blank" class="flex-1 bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 text-white py-2.5 rounded-xl text-center text-sm font-bold font-mono transition-all hover:-translate-y-1 hover:shadow-xl border-2 border-slate-700 hover:border-orange-500/50">
+                <i class="fa-brands fa-github mr-1.5"></i>GitHub
+            </a>
+            <a href="https://guns.lol/akiofreshenss" target="_blank" class="flex-1 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white py-2.5 rounded-xl text-center text-sm font-bold font-mono transition-all hover:-translate-y-1 hover:shadow-xl glow-orange border-2 border-orange-400">
+                <i class="fa-solid fa-gun mr-1.5"></i>Ride With Me
+            </a>
+        </div>
+
+        <div>
+            <h2 class="text-xs font-black uppercase tracking-widest text-orange-400 mb-3 font-orbitron flex items-center gap-2">
+                <i class="fas fa-music text-red-500 text-sm"></i>NOW PLAYING
+            </h2>
+            
+            <!-- Hidden Audio Element -->
+            <audio id="music-player" src="assets/music.mp3" loop autoplay></audio>
+            
+            <div class="w-full h-[85px] bg-black/40 backdrop-blur-xl border-2 border-orange-500/30 rounded-2xl flex items-center px-5 gap-4 shadow-2xl relative overflow-hidden group glow-orange">
+                <!-- Animated glow effect -->
+                <div class="absolute right-0 top-0 w-40 h-40 bg-orange-500/10 blur-[60px] rounded-full pointer-events-none"></div>
+                <div class="absolute left-0 bottom-0 w-40 h-40 bg-red-500/10 blur-[60px] rounded-full pointer-events-none"></div>
+                
+                <!-- Progress Bar -->
+                <div id="progress-bar-container" class="absolute bottom-0 left-0 h-1 bg-orange-900/30 w-full cursor-pointer group/progress">
+                    <div id="progress-bar-fill" class="h-full bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500 shadow-[0_0_20px_rgba(255,107,53,0.8)] relative" style="width: 0%;">
+                        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover/progress:opacity-100 shadow-[0_0_15px_white]"></div>
+                    </div>
+                </div>
+                
+                <!-- Album Art with Equalizer -->
+                <button class="relative w-[50px] h-[50px] rounded-full overflow-hidden border-2 border-orange-500/50 shrink-0 shadow-xl shadow-orange-500/30 group-hover:scale-110 group-hover:border-orange-400 transition-all duration-300 glow-orange">
+                    <img id="album-art" class="w-full h-full object-cover transition-all duration-300" src="assets/album-art.png" alt="Akio Luvs U Baby">
+                    <div class="absolute inset-0 flex items-center justify-center bg-black/20">
+                        <div id="equalizer" class="flex gap-[4px] items-end pb-0 h-5 justify-center opacity-0">
+                            <span class="w-1.5 bg-gradient-to-t from-orange-500 to-yellow-400 rounded-t-sm animate-[equalize_0.8s_ease-in-out_infinite]" style="animation-delay: 0s;"></span>
+                            <span class="w-1.5 bg-gradient-to-t from-orange-500 to-yellow-400 rounded-t-sm animate-[equalize_0.6s_ease-in-out_infinite]" style="animation-delay: 0.1s;"></span>
+                            <span class="w-1.5 bg-gradient-to-t from-orange-500 to-yellow-400 rounded-t-sm animate-[equalize_1s_ease-in-out_infinite]" style="animation-delay: 0.2s;"></span>
+                            <span class="w-1.5 bg-gradient-to-t from-orange-500 to-yellow-400 rounded-t-sm animate-[equalize_0.7s_ease-in-out_infinite]" style="animation-delay: 0.3s;"></span>
+                        </div>
+                    </div>
+                </button>
+                
+                <!-- Track Info -->
+                <div class="flex flex-col flex-1 min-w-0 justify-center gap-0.5">
+                    <div class="flex items-center justify-between mr-2">
+                        <div class="flex flex-col overflow-hidden">
+                            <span class="text-white text-sm font-black tracking-tight truncate">Akio Luvs U Baby</span>
+                            <span class="text-orange-400/70 text-[10px] font-mono uppercase tracking-wider truncate">EXE. AKIO</span>
+                        </div>
+                        <div id="time-display" class="text-[10px] font-mono text-orange-300 bg-orange-900/30 px-2 py-1 rounded-lg border border-orange-500/30 tabular-nums font-bold">0:00</div>
+                    </div>
+                </div>
+                
+                <!-- Volume Control -->
+                <div class="z-50">
+                    <div class="group flex flex-row-reverse items-center justify-end bg-black/80 backdrop-blur-xl border-2 border-orange-500/30 rounded-xl shadow-lg transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] overflow-hidden h-[40px] w-[40px] hover:w-[150px] hover:pr-3 ring-1 ring-orange-500/20 hover:ring-orange-500/50 glow-orange">
+                        <div class="flex-1 h-full flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-3 min-w-[90px]">
+                            <div class="relative w-full h-1.5 bg-orange-900/40 rounded-full cursor-pointer overflow-hidden hover:bg-orange-900/60 transition-colors border border-orange-500/30">
+                                <input type="range" id="volume-slider" min="0" max="100" value="100" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+                                <div id="volume-bar-fill" class="absolute top-0 left-0 h-full bg-gradient-to-r from-orange-500 to-red-500 shadow-[0_0_15px_rgba(255,107,53,0.8)] rounded-full pointer-events-none" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <button id="volume-button" class="w-[40px] h-[40px] flex-shrink-0 flex items-center justify-center text-orange-400 hover:text-orange-300 transition-colors">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Play/Pause Button -->
+                <button id="play-pause-button" class="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full bg-gradient-to-br from-orange-600 to-red-600 border-2 border-orange-400 hover:from-orange-500 hover:to-red-500 hover:scale-110 hover:text-white text-white transition-all duration-300 shadow-xl glow-orange font-bold">
+                    <svg id="play-icon" class="w-4 h-4 fill-current hidden ml-0.5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                    <svg id="pause-icon" class="w-4 h-4 fill-current" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
